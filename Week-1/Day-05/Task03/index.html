@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Simple Calculator</title>
+	<style>
+		body { font-family: Arial, sans-serif; max-width: 420px; margin: 48px auto; padding: 0 16px; }
+		label, input { display: block; width: 100%; box-sizing: border-box; }
+		input { margin: 6px 0 16px; padding: 9px; }
+		button { margin: 0 6px 8px 0; padding: 9px 12px; cursor: pointer; }
+		#message { margin-top: 14px; }
+		.error { color: #b00020; }
+	</style>
+</head>
+<body>
+	<h1>Simple Calculator</h1>
+	<form id="calculator" novalidate>
+		<label for="firstNumber">First number</label>
+		<input id="firstNumber" type="number" step="any">
+
+		<label for="secondNumber">Second number</label>
+		<input id="secondNumber" type="number" step="any">
+
+		<button type="button" data-operation="add">Add</button>
+		<button type="button" data-operation="subtract">Subtract</button>
+		<button type="button" data-operation="multiply">Multiply</button>
+		<button type="button" data-operation="divide">Divide</button>
+		<p id="message" role="status" aria-live="polite"></p>
+	</form>
+
+	<script>
+		const firstInput = document.getElementById('firstNumber');
+		const secondInput = document.getElementById('secondNumber');
+		const message = document.getElementById('message');
+
+		document.querySelectorAll('[data-operation]').forEach((button) => {
+			button.addEventListener('click', () => {
+				message.textContent = '';
+				message.className = '';
+
+				if (firstInput.value.trim() === '' || secondInput.value.trim() === '') {
+					message.textContent = 'Please enter both numbers.';
+					message.className = 'error';
+					return;
+				}
+
+				const first = Number(firstInput.value);
+				const second = Number(secondInput.value);
+				let result;
+
+				switch (button.dataset.operation) {
+					case 'add': result = first + second; break;
+					case 'subtract': result = first - second; break;
+					case 'multiply': result = first * second; break;
+					case 'divide':
+						if (second === 0) {
+							message.textContent = 'Cannot divide by zero.';
+							message.className = 'error';
+							return;
+						}
+						result = first / second;
+						break;
+				}
+
+				message.textContent = `Result: ${result}`;
+			});
+		});
+	</script>
+</body>
+</html>

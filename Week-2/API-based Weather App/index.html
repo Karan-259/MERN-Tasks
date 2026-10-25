@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#101827">
+    <title>Weather Now</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="app">
+        <header class="site-header">
+            <a class="brand" href="" aria-label="Weather Now home">
+                <span class="brand-icon" aria-hidden="true">☼</span>
+                <span>weather<span class="brand-accent">now</span></span>
+            </a>
+        </header>
+        
+        <section class="search-panel" aria-labelledby="page-title">
+            <form id="weather-form" class="search-form">
+                <label class="visually-hidden" for="city-input">City name</label>
+                <span class="search-icon" aria-hidden="true">⌕</span>
+                <input
+                id="city-input"
+                name="city"
+                type="search"
+                placeholder="Enter a city, e.g. Delhi"
+                autocomplete="off"
+                required
+                >
+                <button id="search-button" type="submit">Search <span aria-hidden="true">→</span></button>
+            </form>
+            
+            <p id="status" class="status" role="status" aria-live="polite">
+                Try a city to see its current weather.
+            </p>
+        </section>
+        
+        <section id="weather-card" class="weather-card" aria-label="Current weather" hidden>
+            <div class="weather-topline">
+                <div>
+                    <p class="eyebrow">CURRENT WEATHER</p>
+                    <h2 id="location">—</h2>
+                    <p id="local-date" class="local-date"></p>
+                </div>
+                <img id="weather-icon" class="weather-icon" alt="" width="96" height="96">
+            </div>
+            
+            <div class="temperature-row">
+                <p id="temperature" class="temperature">—<span>°C</span></p>
+                <p id="condition" class="condition">—</p>
+            </div>
+            
+            <div class="details">
+                <div class="detail">
+                    <span class="detail-icon" aria-hidden="true">◌</span>
+                    <div><p class="detail-label">Humidity</p><p id="humidity" class="detail-value">—</p></div>
+                </div>
+                <div class="detail">
+                    <span class="detail-icon" aria-hidden="true">↝</span>
+                    <div><p class="detail-label">Wind speed</p><p id="wind-speed" class="detail-value">—</p></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
