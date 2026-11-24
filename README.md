@@ -8,4 +8,3 @@ MERN stands for **MongoDB, Express.js, React, and Node.js**. Together, these tec
 - **Express.js** — Creates backend routes and APIs, and handles middleware and requests.
 - **React** — Builds the frontend user interface using reusable components.
 - **Node.js** — Runs JavaScript on the server and supports the backend application. 
-
