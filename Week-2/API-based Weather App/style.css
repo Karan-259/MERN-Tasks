@@ -1,0 +1,433 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+    color-scheme: dark;
+    font-family: "DM Sans", sans-serif;
+    color: #f3f6fb;
+    background: #101827;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    --muted: #9aa8bc;
+    --accent: #a9e568;
+    --panel: #182337;
+    --line: rgb(219 232 255 / 12%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background:
+        radial-gradient(ellipse at 50% 35%, rgb(41 62 87 / 48%), transparent 52%),
+        #101827;
+}
+
+body[data-weather="clear"] {
+    background: radial-gradient(ellipse at 50% 38%, rgb(119 133 54 / 34%), transparent 54%), #101827;
+}
+
+body[data-weather="clouds"] {
+    background: radial-gradient(ellipse at 50% 38%, rgb(83 109 139 / 38%), transparent 54%), #101827;
+}
+
+body[data-weather="rain"],
+body[data-weather="drizzle"],
+body[data-weather="thunderstorm"] {
+    background: radial-gradient(ellipse at 50% 38%, rgb(42 98 126 / 38%), transparent 54%), #101827;
+}
+
+body[data-weather="snow"] {
+    background: radial-gradient(ellipse at 50% 38%, rgb(121 155 178 / 34%), transparent 54%), #101827;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.app {
+    width: min(100% - 48px, 820px);
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-header {
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #f3f6fb;
+    font: 800 1.2rem "Manrope", sans-serif;
+    letter-spacing: -0.06em;
+    text-decoration: none;
+}
+
+.brand-icon {
+    color: var(--accent);
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.brand-accent {
+    color: var(--accent);
+}
+
+.header-note,
+.intro,
+.status,
+.local-date {
+    color: var(--muted);
+}
+
+.header-note {
+    margin: 0;
+    font-size: 0.84rem;
+}
+
+.search-panel {
+    width: min(100%, 650px);
+    margin: clamp(66px, 12vh, 112px) auto 34px;
+    text-align: center;
+}
+
+.eyebrow {
+    margin: 0 0 13px;
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+h1,
+h2,
+p {
+    margin-top: 0;
+}
+
+h1 {
+    margin-bottom: 12px;
+    font: 700 clamp(2.1rem, 6vw, 3.35rem)/1.12 "Manrope", sans-serif;
+    letter-spacing: -0.065em;
+}
+
+h1 span {
+    color: var(--accent);
+}
+
+.intro {
+    margin-bottom: 30px;
+    font-size: 0.98rem;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 64px;
+    padding: 7px;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: rgb(24 35 55 / 88%);
+    box-shadow: 0 16px 42px rgb(0 0 0 / 18%);
+    text-align: left;
+}
+
+.search-icon {
+    padding-left: 14px;
+    color: #8493a9;
+    font-size: 1.8rem;
+    line-height: 1;
+    transform: rotate(-20deg);
+}
+
+.search-form input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    color: #f3f6fb;
+    background: transparent;
+    font-size: 0.95rem;
+}
+
+.search-form input::placeholder {
+    color: #8493a9;
+}
+
+.search-form:focus-within {
+    border-color: rgb(169 229 104 / 65%);
+    box-shadow: 0 0 0 3px rgb(169 229 104 / 10%), 0 16px 42px rgb(0 0 0 / 18%);
+}
+
+.search-form button {
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 10px;
+    color: #172012;
+    background: var(--accent);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 160ms ease, transform 160ms ease;
+}
+
+.search-form button:hover:not(:disabled) {
+    background: #baf27b;
+    transform: translateY(-1px);
+}
+
+.search-form button:focus-visible {
+    outline: 3px solid #f3f6fb;
+    outline-offset: 3px;
+}
+
+.search-form button:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.status {
+    min-height: 24px;
+    margin: 15px 0 0;
+    font-size: 0.84rem;
+}
+
+.status[data-state="error"] {
+    color: #ffaaa6;
+}
+
+.status[data-state="loading"] {
+    color: var(--accent);
+}
+
+.weather-card {
+    width: min(100%, 520px);
+    margin: 0 auto 40px;
+    padding: 28px 32px 25px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: linear-gradient(145deg, rgb(29 44 66 / 96%), rgb(22 33 51 / 96%));
+    box-shadow: 0 22px 60px rgb(0 0 0 / 22%);
+    animation: rise-in 350ms ease both;
+}
+
+.weather-card[hidden] {
+    display: none;
+}
+
+.weather-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.weather-topline .eyebrow {
+    margin-bottom: 8px;
+}
+
+.weather-topline h2 {
+    margin-bottom: 4px;
+    font: 700 clamp(1.45rem, 4vw, 1.9rem) "Manrope", sans-serif;
+    letter-spacing: -0.04em;
+}
+
+.local-date {
+    margin-bottom: 0;
+    font-size: 0.83rem;
+}
+
+.weather-icon {
+    width: 88px;
+    height: 88px;
+    object-fit: contain;
+}
+
+.temperature-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 6px 0 22px;
+}
+
+.temperature {
+    margin: 0;
+    font: 600 clamp(4rem, 12vw, 5.4rem)/1 "Manrope", sans-serif;
+    letter-spacing: -0.09em;
+}
+
+.temperature span {
+    margin-left: 4px;
+    color: var(--accent);
+    font-size: 1.8rem;
+    vertical-align: top;
+    letter-spacing: -0.04em;
+}
+
+.condition {
+    margin: 10px 0 0;
+    color: #c4cfdd;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.detail-icon {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border-radius: 12px;
+    color: var(--accent);
+    background: rgb(169 229 104 / 9%);
+    font-size: 1.4rem;
+}
+
+.detail-label {
+    margin: 0 0 3px;
+    color: var(--muted);
+    font-size: 0.75rem;
+}
+
+.detail-value {
+    margin: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+@keyframes rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 560px) {
+    .app {
+        width: min(100% - 32px, 820px);
+    }
+
+    .site-header {
+        min-height: 74px;
+    }
+
+    .header-note {
+        max-width: 145px;
+        font-size: 0.72rem;
+        text-align: right;
+    }
+
+    .search-panel {
+        margin-top: 66px;
+    }
+
+    .search-form {
+        gap: 7px;
+    }
+
+    .search-icon {
+        padding-left: 8px;
+    }
+
+    .search-form input {
+        font-size: 0.86rem;
+    }
+
+    .search-form button {
+        padding: 0 13px;
+        font-size: 0.84rem;
+    }
+
+    .weather-card {
+        padding: 23px 20px;
+    }
+
+    .weather-icon {
+        width: 72px;
+        height: 72px;
+    }
+
+    .temperature-row {
+        gap: 12px;
+    }
+
+    .temperature {
+        font-size: clamp(3.7rem, 19vw, 5rem);
+    }
+
+    .condition {
+        font-size: 0.87rem;
+    }
+
+    .details {
+        gap: 8px;
+    }
+
+    .detail {
+        gap: 8px;
+    }
+
+    .detail-icon {
+        width: 34px;
+        height: 34px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 7px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

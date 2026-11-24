@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Buttons</title>
+</head>
+<body>
+    <div>
+        <h1 id="heading">HELLO</h1>
+        <button onclick="myFunction('red')" id="red">Red</button>
+        <button onclick="myFunction('green')" id="green">Green</button>
+        <button onclick="myFunction('blue')" id="blue">Blue</button>
+        <select onchange="myFunction('',this.value)">
+            <option value=""></option>
+            <option value="Arial">Arial</option>
+            <option value="Courier">Courier</option>
+            <option value="monospace">Monospace</option>
+            <option value="Times New Roman">Times New Roman</option>
+        </select>
+        <button  onclick="increaseFont()" id="increase">Increase A+</button>
+        <button onclick="decreaseFont()" id="decrease">Decrease A-</button>
+        <button id="Bold" onclick="textBold()">Bold</button>
+        <button id="Italic">Italic</button>
+        <button id="Underline">Underline</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
